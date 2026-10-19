@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SoloPush — Study Smarter</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;700&family=Lexend:wght@300;400;500;600;700&family=Orbitron:wght@400;500;600;700&family=Outfit:wght@300;400;500;600;700&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- ============ SIDEBAR ============ -->
+  <aside class="sidebar" id="sidebar">
+    <div class="sidebar-logo">
+      <i class="fa-solid fa-rocket"></i>
+      <span>SoloPush</span>
+    </div>
+
+    <nav class="sidebar-nav">
+      <button class="nav-btn active" data-view="dashboard">
+        <i class="fa-solid fa-gauge-high"></i><span>Dashboard</span>
+      </button>
+      <button class="nav-btn" data-view="tasks">
+        <i class="fa-solid fa-list-check"></i><span>Tasks</span>
+      </button>
+      <button class="nav-btn" data-view="notes">
+        <i class="fa-solid fa-note-sticky"></i><span>Notes</span>
+      </button>
+    </nav>
+
+    <div class="sidebar-footer">
+      <div class="user-card" id="userInfo" style="display:none;">
+        <div class="user-avatar-badge" id="userAvatarBadge">🚀</div>
+        <div class="user-details">
+          <span class="user-name" id="userName">Student</span>
+          <span class="user-grade" id="userGrade">SoloPush Student</span>
+        </div>
+      </div>
+      <button class="btn-auth" id="authBtn">
+        <i class="fa-brands fa-google"></i><span>Sign in</span>
+      </button>
+    </div>
+  </aside>
+
+  <!-- ============ MOBILE HEADER ============ -->
+  <header class="mobile-header" id="mobileHeader">
+    <button class="hamburger" id="hamburger">
+      <i class="fa-solid fa-bars"></i>
+    </button>
+    <div class="mobile-logo">
+      <i class="fa-solid fa-rocket"></i> SoloPush
+    </div>
+    <button class="btn-auth-mobile" id="authBtnMobile">
+      <i class="fa-brands fa-google"></i>
+    </button>
+  </header>
+
+  <!-- ============ MAIN CONTENT ============ -->
+  <main class="main" id="main">
+
+    <!-- Top-Right Actions: Mini Clock + Settings Gear Icon -->
+    <div class="top-bar-actions" id="topBarActions">
+      <div class="mini-clock" id="miniClock">
+        <div class="mini-flip" id="miniHourTens"><span>0</span></div>
+        <div class="mini-flip" id="miniHourOnes"><span>0</span></div>
+        <div class="mini-colon">:</div>
+        <div class="mini-flip" id="miniMinTens"><span>0</span></div>
+        <div class="mini-flip" id="miniMinOnes"><span>0</span></div>
+      </div>
+      <button class="btn-settings" id="btnSettings" title="Settings" aria-label="Settings">
+        <i class="fa-solid fa-gear"></i>
+      </button>
+    </div>
+
+    <!-- -------- DASHBOARD VIEW -------- -->
+    <section class="view active" id="view-dashboard">
+      <h1 class="view-title">Dashboard</h1>
+      <p class="view-subtitle">Stay focused. Stay ahead.</p>
+
+      <!-- Focus Clock (Study Timer) -->
+      <div class="focus-clock-wrapper" id="focusClockWrapper">
+        <div class="focus-header">
+          <div class="focus-header-title">
+            <i class="fa-solid fa-brain"></i>
+            <h2>Focus Clock</h2>
+            <span class="focus-subtitle">Track your study time</span>
+          </div>
+          <button class="btn-focus-fullscreen" id="btnFocusFullscreen" title="Toggle Fullscreen Focus" aria-label="Toggle Fullscreen Focus">
+            <i class="fa-solid fa-expand"></i>
+            <span class="fs-label">Fullscreen</span>
+          </button>
+        </div>
+
+        <div class="flip-clock focus-flip-clock" id="focusClock">
+          <div class="clock-segment">
+            <div class="flip-card" id="focusHourTens"><div class="flip-card-inner"><div class="flip-card-front"><span>0</span></div><div class="flip-card-back"><span>0</span></div></div></div>
+            <div class="flip-card" id="focusHourOnes"><div class="flip-card-inner"><div class="flip-card-front"><span>0</span></div><div class="flip-card-back"><span>0</span></div></div></div>
+            <label class="clock-label">HOURS</label>
+          </div>
+          <div class="clock-colon focus-colon">:</div>
+          <div class="clock-segment">
+            <div class="flip-card" id="focusMinTens"><div class="flip-card-inner"><div class="flip-card-front"><span>0</span></div><div class="flip-card-back"><span>0</span></div></div></div>
+            <div class="flip-card" id="focusMinOnes"><div class="flip-card-inner"><div class="flip-card-front"><span>0</span></div><div class="flip-card-back"><span>0</span></div></div></div>
+            <label class="clock-label">MINUTES</label>
+          </div>
+          <div class="clock-colon focus-colon">:</div>
+          <div class="clock-segment">
+            <div class="flip-card" id="focusSecTens"><div class="flip-card-inner"><div class="flip-card-front"><span>0</span></div><div class="flip-card-back"><span>0</span></div></div></div>
+            <div class="flip-card" id="focusSecOnes"><div class="flip-card-inner"><div class="flip-card-front"><span>0</span></div><div class="flip-card-back"><span>0</span></div></div></div>
+            <label class="clock-label">SECONDS</label>
+          </div>
+        </div>
+
+        <div class="focus-controls">
+          <button class="focus-btn focus-btn-start" id="focusStart">
+            <i class="fa-solid fa-play"></i><span>Start</span>
+          </button>
+          <button class="focus-btn focus-btn-pause" id="focusPause" disabled>
+            <i class="fa-solid fa-pause"></i><span>Pause</span>
+          </button>
+          <button class="focus-btn focus-btn-reset" id="focusReset" disabled>
+            <i class="fa-solid fa-rotate-left"></i><span>Reset</span>
+          </button>
+        </div>
+
+        <div class="focus-today-stats">
+          <div class="focus-stat">
+            <i class="fa-solid fa-clock"></i>
+            <span>Today's Total:</span>
+            <strong id="focusTodayTotal">0h 0m</strong>
+          </div>
+          <div class="focus-stat">
+            <i class="fa-solid fa-bolt"></i>
+            <span>Sessions:</span>
+            <strong id="focusTodaySessions">0</strong>
+          </div>
+        </div>
+
+        <div class="focus-sessions-log" id="focusSessionsLog">
+          <!-- session entries rendered here -->
+        </div>
+      </div>
+
+      <!-- Quick Stats -->
+      <div class="stats-grid">
+        <div class="stat-card">
+          <i class="fa-solid fa-clipboard-check"></i>
+          <div class="stat-value" id="statTotal">0</div>
+          <div class="stat-label">Today's Tasks</div>
+        </div>
+        <div class="stat-card">
+          <i class="fa-solid fa-circle-check"></i>
+          <div class="stat-value" id="statDone">0</div>
+          <div class="stat-label">Completed</div>
+        </div>
+        <div class="stat-card">
+          <i class="fa-solid fa-note-sticky"></i>
+          <div class="stat-value" id="statNotes">0</div>
+          <div class="stat-label">Notes</div>
+        </div>
+        <div class="stat-card">
+          <i class="fa-solid fa-fire"></i>
+          <div class="stat-value" id="statStreak">0</div>
+          <div class="stat-label">Day Streak</div>
+        </div>
+        <div class="stat-card">
+          <i class="fa-solid fa-brain"></i>
+          <div class="stat-value" id="statStudy">0h 0m</div>
+          <div class="stat-label">Study Time</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- -------- TASKS VIEW -------- -->
+    <section class="view" id="view-tasks">
+      <h1 class="view-title">Tasks</h1>
+      <p class="view-subtitle">Plan your day, own your results.</p>
+
+      <div class="tasks-layout">
+        <!-- Calendar -->
+        <div class="calendar-card glass-card">
+          <div class="calendar-header">
+            <button class="cal-nav" id="calPrev"><i class="fa-solid fa-chevron-left"></i></button>
+            <h3 id="calMonthYear"></h3>
+            <button class="cal-nav" id="calNext"><i class="fa-solid fa-chevron-right"></i></button>
+          </div>
+          <div class="calendar-weekdays">
+            <span>Sun</span><span>Mon</span><span>Tue</span><span>Wed</span><span>Thu</span><span>Fri</span><span>Sat</span>
+          </div>
+          <div class="calendar-days" id="calendarDays"></div>
+          <button class="btn-today" id="btnToday">Today</button>
+        </div>
+
+        <!-- Task list -->
+        <div class="task-list-card glass-card">
+          <div class="task-list-header">
+            <h3 id="taskDateTitle">Tasks for Today</h3>
+            <button class="btn-add-task" id="btnAddTask"><i class="fa-solid fa-plus"></i> Add Task</button>
+          </div>
+          <div class="task-input-row" id="taskInputRow" style="display:none;">
+            <input type="text" id="taskInput" placeholder="What do you need to do?" maxlength="120" />
+            <button class="btn-save-task" id="btnSaveTask"><i class="fa-solid fa-check"></i></button>
+            <button class="btn-cancel-task" id="btnCancelTask"><i class="fa-solid fa-xmark"></i></button>
+          </div>
+          <ul class="task-list" id="taskList">
+            <li class="task-empty">No tasks for this day. Click <strong>+ Add Task</strong> to begin!</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- -------- NOTES VIEW -------- -->
+    <section class="view" id="view-notes">
+      <h1 class="view-title">Notes</h1>
+      <p class="view-subtitle">Capture ideas before they disappear.</p>
+
+      <button class="btn-new-note" id="btnNewNote"><i class="fa-solid fa-plus"></i> New Note</button>
+
+      <div class="notes-grid" id="notesGrid">
+        <!-- notes rendered here -->
+      </div>
+    </section>
+  </main>
+
+  <!-- ============ NOTE MODAL ============ -->
+  <div class="modal-overlay" id="noteModal">
+    <div class="modal glass-card">
+      <div class="modal-header">
+        <h3 id="noteModalTitle">New Note</h3>
+        <button class="modal-close" id="noteModalClose"><i class="fa-solid fa-xmark"></i></button>
+      </div>
+      <input type="text" id="noteTitleInput" class="modal-input" placeholder="Note title…" maxlength="80" />
+      <textarea id="noteBodyInput" class="modal-textarea" placeholder="Write your note here…" rows="8"></textarea>
+      <div class="modal-color-row">
+        <span>Color:</span>
+        <button class="color-dot active" data-color="#7c3aed" style="background:#7c3aed;"></button>
+        <button class="color-dot" data-color="#2563eb" style="background:#2563eb;"></button>
+        <button class="color-dot" data-color="#059669" style="background:#059669;"></button>
+        <button class="color-dot" data-color="#d97706" style="background:#d97706;"></button>
+        <button class="color-dot" data-color="#dc2626" style="background:#dc2626;"></button>
+        <button class="color-dot" data-color="#6b7280" style="background:#6b7280;"></button>
+      </div>
+      <div class="modal-actions">
+        <button class="btn btn-secondary" id="noteModalCancel">Cancel</button>
+        <button class="btn btn-primary" id="noteModalSave">Save Note</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============ SETTINGS MODAL ============ -->
+  <div class="modal-overlay" id="settingsModal">
+    <div class="modal glass-card settings-modal">
+      <div class="modal-header">
+        <h3><i class="fa-solid fa-sliders"></i> Settings</h3>
+        <button class="modal-close" id="settingsModalClose"><i class="fa-solid fa-xmark"></i></button>
+      </div>
+      
+      <div class="settings-content">
+        <!-- Theme Mode -->
+        <div class="setting-item">
+          <div class="setting-info">
+            <label class="setting-label"><i class="fa-solid fa-circle-half-stroke"></i> Theme Mode</label>
+            <span class="setting-desc">Switch between Dark and Light appearance</span>
+          </div>
+          <div class="theme-toggle-group">
+            <button class="theme-pill active" data-theme="dark" id="themeDarkBtn">
+              <i class="fa-solid fa-moon"></i> Dark
+            </button>
+            <button class="theme-pill" data-theme="light" id="themeLightBtn">
+              <i class="fa-solid fa-sun"></i> Light
+            </button>
+          </div>
+        </div>
+
+        <!-- Font Family -->
+        <div class="setting-item">
+          <div class="setting-info">
+            <label class="setting-label"><i class="fa-solid fa-font"></i> Font Style</label>
+            <span class="setting-desc">Choose a font optimized for study & reading</span>
+          </div>
+          <select id="fontSelect" class="setting-select">
+            <option value="Inter">Inter (Clean & Modern)</option>
+            <option value="Poppins">Poppins (Friendly & Rounded)</option>
+            <option value="Lexend">Lexend (Easy-to-Read)</option>
+            <option value="Outfit">Outfit (Crisp Geometric)</option>
+            <option value="JetBrains Mono">JetBrains Mono (Monospace)</option>
+            <option value="Bell MT">Bell MT (Classic Serif)</option>
+          </select>
+        </div>
+
+        <!-- Accent Color -->
+        <div class="setting-item">
+          <div class="setting-info">
+            <label class="setting-label"><i class="fa-solid fa-palette"></i> Accent Color</label>
+            <span class="setting-desc">Customize buttons & highlights</span>
+          </div>
+          <div class="accent-color-row">
+            <button class="accent-dot active" data-accent="#7c3aed" title="Purple (Default)" style="background:#7c3aed;"></button>
+            <button class="accent-dot" data-accent="#2563eb" title="Royal Blue" style="background:#2563eb;"></button>
+            <button class="accent-dot" data-accent="#059669" title="Emerald Green" style="background:#059669;"></button>
+            <button class="accent-dot" data-accent="#d97706" title="Amber Orange" style="background:#d97706;"></button>
+            <button class="accent-dot" data-accent="#e11d48" title="Rose Red" style="background:#e11d48;"></button>
+            <button class="accent-dot" data-accent="#06b6d4" title="Cyan / Neon" style="background:#06b6d4;"></button>
+          </div>
+        </div>
+
+        <!-- Clock Format: 24h vs 12h -->
+        <div class="setting-item">
+          <div class="setting-info">
+            <label class="setting-label"><i class="fa-regular fa-clock"></i> 24-Hour Clock</label>
+            <span class="setting-desc">Display time in 24h format</span>
+          </div>
+          <label class="toggle-label">
+            <input type="checkbox" id="toggle24Hour" checked />
+            <span class="toggle-slider"></span>
+          </label>
+        </div>
+      </div>
+
+      <div class="modal-actions">
+        <button class="btn btn-primary" id="settingsModalDone">Done</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============ AUTH / LOGIN MODAL ============ -->
+  <div class="modal-overlay" id="authModal">
+    <div class="modal glass-card auth-modal">
+      <div class="modal-header">
+        <div class="auth-header-title">
+          <i class="fa-solid fa-graduation-cap"></i>
+          <h3>Student Sign In</h3>
+        </div>
+        <button class="modal-close" id="authModalClose"><i class="fa-solid fa-xmark"></i></button>
+      </div>
+
+      <div class="auth-modal-content">
+        <!-- Quick Google Sign In -->
+        <button class="btn-google-login" id="btnGoogleInstantLogin">
+          <svg class="google-icon" viewBox="0 0 24 24" width="20" height="20">
+            <path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/>
+            <path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/>
+            <path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.06H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.94l2.85-2.22.81-.63z"/>
+            <path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.06l3.66 2.84c.87-2.6 3.3-4.52 6.16-4.52z"/>
+          </svg>
+          <span>Continue with Google</span>
+        </button>
+
+        <div class="auth-divider">
+          <span>or create / customize student profile</span>
+        </div>
+
+        <form id="studentLoginForm" onsubmit="return false;">
+          <div class="auth-field">
+            <label><i class="fa-solid fa-user"></i> Student Name</label>
+            <input type="text" id="authInputName" placeholder="Enter your name (e.g. Aradhya)" required maxlength="40" />
+          </div>
+
+          <div class="auth-field">
+            <label><i class="fa-solid fa-envelope"></i> Email Address</label>
+            <input type="email" id="authInputEmail" placeholder="student@gmail.com" required maxlength="60" />
+          </div>
+
+          <div class="auth-field">
+            <label><i class="fa-solid fa-award"></i> Grade / Target Goal</label>
+            <input type="text" id="authInputGoal" placeholder="e.g. Class 10 Board / JEE / SAT" maxlength="40" />
+          </div>
+
+          <!-- Avatar Picker -->
+          <div class="auth-field">
+            <label><i class="fa-solid fa-face-smile"></i> Choose Avatar</label>
+            <div class="avatar-picker" id="avatarPicker">
+              <button type="button" class="avatar-option active" data-avatar="🚀"><span class="avatar-emoji">🚀</span></button>
+              <button type="button" class="avatar-option" data-avatar="⚡"><span class="avatar-emoji">⚡</span></button>
+              <button type="button" class="avatar-option" data-avatar="🧠"><span class="avatar-emoji">🧠</span></button>
+              <button type="button" class="avatar-option" data-avatar="🎓"><span class="avatar-emoji">🎓</span></button>
+              <button type="button" class="avatar-option" data-avatar="🔥"><span class="avatar-emoji">🔥</span></button>
+              <button type="button" class="avatar-option" data-avatar="🌟"><span class="avatar-emoji">🌟</span></button>
+            </div>
+          </div>
+
+          <div class="auth-actions">
+            <button type="submit" class="btn btn-primary btn-submit-auth" id="btnSubmitAuth">
+              <i class="fa-solid fa-right-to-bracket"></i> Save & Sign In
+            </button>
+          </div>
+        </form>
+
+        <div class="auth-footer-note">
+          <i class="fa-solid fa-shield-halved"></i> All your tasks, study logs & notes are automatically saved to your profile every day.
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============ OVERLAY FOR MOBILE SIDEBAR ============ -->
+  <div class="sidebar-overlay" id="sidebarOverlay"></div>
+
+  <!-- ============ TOAST ============ -->
+  <div class="toast-container" id="toastContainer"></div>
+
+  <!-- ============ FIREBASE SDKs ============ -->
+  <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-auth-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore-compat.js"></script>
+
+  <script src="app.js"></script>
+</body>
+</html>
